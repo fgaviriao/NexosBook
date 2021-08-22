@@ -69,7 +69,7 @@ namespace Book.Services
             }
             return false;
         }
-
+     
         public IEnumerable<BookDto> GetAllByAuthorId(int id)
         {
             var rows = _repository.GetAllByAuthorId(id);

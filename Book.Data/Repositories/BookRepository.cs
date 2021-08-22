@@ -54,6 +54,20 @@ namespace Book.Data.Repositories
             _nexosDb.Books.Remove(data);
         }
 
+        public void DeleteByAuthorId(int id)
+        {
+            if (id == 0)
+            {
+                throw new ArgumentException("El id del author no puede ser cero.");
+            }
+            
+            var rows = _nexosDb.Books.Where(c => c.AuthorId == id);
+            if(rows != null && rows.Count() > 0)
+            {
+                _nexosDb.Books.RemoveRange(rows);
+            }
+        }
+
         public void Update(Book data)
         {
             if (data == null)

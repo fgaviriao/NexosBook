@@ -13,10 +13,12 @@ namespace Book.Services
     public class AuthorServices : IAuthorServices
     {
         private readonly IAuthorRepository _repository;
+        private readonly IBookRepository _bookRepository;
         private readonly IMapper _mapper;
 
-        public AuthorServices(IAuthorRepository repository, IMapper mapper)
+        public AuthorServices(IAuthorRepository repository, IBookRepository bookRepository, IMapper mapper)
         {
+            _bookRepository = bookRepository;
             _repository = repository;
             _mapper = mapper;
         }
@@ -60,10 +62,12 @@ namespace Book.Services
 
         public bool Delete(int id)
         {
-            var dbmodel = _repository.GetById(id);
-            if (dbmodel != null)
+            var author = _repository.GetById(id);
+            if (author != null)
             {
-                _repository.Delete(dbmodel);
+                _bookRepository.DeleteByAuthorId(author.Id);
+                
+                _repository.Delete(author);
                 _repository.SaveChanges();
                 return true;
             }
