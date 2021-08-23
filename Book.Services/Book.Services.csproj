@@ -56,12 +56,16 @@
   <ItemGroup />
   <ItemGroup>
     <Compile Include="AuthorServices.cs" />
+    <Compile Include="BookConfigurationServices.cs" />
     <Compile Include="Dto\AuthorAutoMapperProfile.cs" />
     <Compile Include="Dto\AuthorDto.cs" />
     <Compile Include="Dto\BookAutoMapperProfile.cs" />
+    <Compile Include="Dto\BookConfigurationAutoMapperProfile.cs" />
+    <Compile Include="Dto\BookConfigurationDto.cs" />
     <Compile Include="Dto\BookDto.cs" />
     <Compile Include="BookServices.cs" />
     <Compile Include="IAuthorServices.cs" />
+    <Compile Include="IBookConfigurationServices.cs" />
     <Compile Include="IBookServices.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
