@@ -14,11 +14,13 @@ namespace Book.Services
     {
         private readonly IBookRepository _repository;
         private readonly IMapper _mapper;
+        private readonly IBookConfigurationServices _configuration;
 
-        public BookServices(IBookRepository repository, IMapper mapper)
+        public BookServices(IBookRepository repository, IBookConfigurationServices configuration, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
+            _configuration = configuration;
         }
 
         public IEnumerable<BookDto> GetAll()
@@ -33,13 +35,25 @@ namespace Book.Services
             return _mapper.Map<BookDto>(rows);
         }
 
+        /// <summary>
+        /// Registra un libro, validando el maximo de libros permitidos por autor. Si tiene el maximo permitido retona null
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public BookDto Create(BookDto data)
         {
-            var dbmodel = _mapper.Map<Data.Book>(data);
-            _repository.Save(dbmodel);
-            _repository.SaveChanges();
-            var dto = _mapper.Map<BookDto>(dbmodel);
-            return dto;
+            var maxbook = _configuration.GetConfiguration().MaxBookByAuthor;
+            var totalbook = GetAllByAuthorId(data.AuthorId).Count();
+            if(totalbook < maxbook)
+            {
+                var dbmodel = _mapper.Map<Data.Book>(data);
+                _repository.Save(dbmodel);
+                _repository.SaveChanges();
+                var dto = _mapper.Map<BookDto>(dbmodel);
+                return dto;
+            }
+
+            return null;
         }
 
         public BookDto Update(int id, BookDto data)

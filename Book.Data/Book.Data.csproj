@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Author.cs" />
     <Compile Include="Book.cs" />
+    <Compile Include="BookConfiguration.cs" />
     <Compile Include="Migrations\202108190420039_initdb.cs" />
     <Compile Include="Migrations\202108190420039_initdb.designer.cs">
       <DependentUpon>202108190420039_initdb.cs</DependentUpon>
@@ -76,10 +77,16 @@
     <Compile Include="Migrations\202108211722563_book_rename_field.designer.cs">
       <DependentUpon>202108211722563_book_rename_field.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202108230247275_configurationbook.cs" />
+    <Compile Include="Migrations\202108230247275_configurationbook.designer.cs">
+      <DependentUpon>202108230247275_configurationbook.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NexosBD.cs" />
     <Compile Include="Repositories\AuthorRepository.cs" />
+    <Compile Include="Repositories\BookConfigurationRepository.cs" />
     <Compile Include="Repositories\IAuthorRepository.cs" />
+    <Compile Include="Repositories\IBookConfigurationRepository.cs" />
     <Compile Include="Repositories\IBookRepository.cs" />
     <Compile Include="Repositories\BookRepository.cs" />
   </ItemGroup>
@@ -95,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202108211722563_book_rename_field.resx">
       <DependentUpon>202108211722563_book_rename_field.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108230247275_configurationbook.resx">
+      <DependentUpon>202108230247275_configurationbook.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

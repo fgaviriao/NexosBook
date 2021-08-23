@@ -45,7 +45,12 @@ namespace BookApi.Controllers
             try
             {
                 var row = _service.Create(data);
-                return Request.CreateResponse(HttpStatusCode.OK, row, Configuration.Formatters.JsonFormatter);
+                if(row != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, row, Configuration.Formatters.JsonFormatter);
+                }
+
+                return Request.CreateResponse(HttpStatusCode.Forbidden, "No se puede superar el maximo de libros permitidos.");
             }
             catch (Exception)
             {

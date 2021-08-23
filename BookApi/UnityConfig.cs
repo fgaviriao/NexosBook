@@ -21,15 +21,18 @@ namespace BookApi
             
             container.RegisterType<IAuthorRepository, AuthorRepository>();
             container.RegisterType<IBookRepository, BookRepository>();
+            container.RegisterType<IBookConfigurationRepository, BookConfigurationRepository>();
 
             container.RegisterType<IBookServices, BookServices>();
             container.RegisterType<IAuthorServices, AuthorServices>();
+            container.RegisterType<IBookConfigurationServices, BookConfigurationServices>();
 
 
             var automapperConfiguration = new MapperConfiguration(configuration =>
             {
                 configuration.AddProfile(new AuthorAutoMapperProfile());
                 configuration.AddProfile(new BookAutoMapperProfile());
+                configuration.AddProfile(new BookConfigurationAutoMapperProfile());
             });
 
             container.RegisterInstance<IMapper>(automapperConfiguration.CreateMapper());
